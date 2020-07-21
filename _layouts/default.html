@@ -40,19 +40,17 @@ layout: table_wrappers
     </symbol>
   </svg>
 
-  <div class="side-bar">
-    <div class="site-header">
-      <a href="{{ '/' | absolute_url }}" class="site-title lh-tight">{% include title.html %}</a>
-      <a href="#" id="menu-button" class="site-button">
-        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg>
-      </a>
+<div class="page-wrap">
+    <div class="page-banner">
+      {% include custom-banner.html %}
+      <!-- Need menu-button element defined to avoid Javascript error
+    in site initialization. -->
+      <a href="#" id="menu-button"></a>
     </div>
+  <div class="side-bar">
     <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav">
       {% include nav.html %}
     </nav>
-    <footer class="site-footer">
-      This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
-    </footer>
   </div>
   <div class="main" id="top">
     <div id="main-header" class="main-header">
@@ -85,14 +83,17 @@ layout: table_wrappers
     </div>
     <div id="main-content-wrap" class="main-content-wrap">
       {% unless page.url == "/" %}
-        {% if page.parent %}
+        {% if parent_section %}
           <nav aria-label="Breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb-nav-list">
-              {% if page.grand_parent %}
-                <li class="breadcrumb-nav-list-item"><a href="{{ first_level_url }}">{{ page.grand_parent }}</a></li>
-                <li class="breadcrumb-nav-list-item"><a href="{{ second_level_url }}">{{ page.parent }}</a></li>
+	      <li class="breadcrumb-nav-list-item"><span>{{ parent_section }}</span></li>
+              {% if grand_parent %}
+                <li class="breadcrumb-nav-list-item"><a href="{{ grand_parent_url }}">{{ grand_parent }}</a></li>
+                <li class="breadcrumb-nav-list-item"><a href="{{ parent_url }}">{{ parent }}</a></li>
               {% else %}
-                <li class="breadcrumb-nav-list-item"><a href="{{ first_level_url }}">{{ page.parent }}</a></li>
+                  {% if parent %}
+                  <li class="breadcrumb-nav-list-item"><a href="{{ parent_url }}">{{ parent }}</a></li>
+		  {% endif %}
               {% endif %}
               <li class="breadcrumb-nav-list-item"><span>{{ page.title }}</span></li>
             </ol>
@@ -119,38 +120,9 @@ layout: table_wrappers
           </ul>
         {% endif %}
 
-        {% if site.footer_content != nil or site.last_edit_timestamp or site.gh_edit_link %}
-          <hr>
-          <footer>
-            {% if site.back_to_top %}
-              <p><a href="#top" id="back-to-top">{{ site.back_to_top_text }}</a></p>
-            {% endif %}
-            {% if site.footer_content != nil %}
-              <p class="text-small text-grey-dk-000 mb-0">{{ site.footer_content }}</p>
-            {% endif %}
-
-            {% if site.last_edit_timestamp or site.gh_edit_link %}
-              <div class="d-flex mt-2">
-                {% if site.last_edit_timestamp and site.last_edit_time_format and page.last_modified_date %}
-                  <p class="text-small text-grey-dk-000 mb-0 mr-2">
-                    Page last modified: <span class="d-inline-block">{{ page.last_modified_date | date: site.last_edit_time_format }}</span>.
-                  </p>
-                {% endif %}
-                {% if
-                  site.gh_edit_link and
-                  site.gh_edit_link_text and
-                  site.gh_edit_repository and
-                  site.gh_edit_branch and
-                  site.gh_edit_view_mode
-                %}
-                  <p class="text-small text-grey-dk-000 mb-0">
-                    <a href="{{ site.gh_edit_repository }}/{{ site.gh_edit_view_mode }}/{{ site.gh_edit_branch }}/{{ page.path }}" id="edit-this-page">{{ site.gh_edit_link_text }}</a>
-                  </p>
-                {% endif %}
-              </div>
-            {% endif %}
-          </footer>
-        {% endif %}
+      <div class="site-footer">
+        {% include custom-footer.html %}
+      </div>
 
       </div>
     </div>

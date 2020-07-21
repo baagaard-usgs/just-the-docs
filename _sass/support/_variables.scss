@@ -133,3 +133,15 @@ $media-queries: (
   lg: $content-width + $nav-width,
   xl: 1400px,
 ) !default;
+
+// ==============================================================================
+// Customization
+// ==============================================================================
+
+//
+// Title
+//
+
+$title-background-color: black !default;
+$title-color: white !default;
+$title-height: 3.0rem !default;
