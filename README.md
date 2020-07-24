@@ -4,7 +4,7 @@ This fork is a custom version of
 [pmarsceill/just-the-docs](https://github.com/pmarsceill/just-the-docs). We
 customize the title banner, navigation side bar, and footer.
 
-## Title banner
+### Title banner
 
 We add variables to define the layout of the full-width title banner:
 
@@ -16,17 +16,27 @@ We add variables to define the layout of the full-width title banner:
 The background color, color, and height should be set using the color
 scheme. The image URL should be set in `_config.yml`.
 
-## Site navigation
+### Site navigation
 
 The site navigation (table of contents) is generated manually using a
 [three-level navigation list](https://jekyllrb.com/tutorials/navigation/#scenario-4-three-level-navigation-list). Note
 that we use `subitems` and `subsubitems` for the list structure.
 
-## Footer
+### Footer
 
 The footer include the software version and time stamp of when the
 documentation was generated. The software version is set using
 `software-version` in `_config.yml`.
+
+## Sites using baagaard-usgs/just-the-docs
+
+These sites may require updating when this fork is changed.
+
+* [usgs/groundmotion-processing](https://github.com/usgs/groundmotion-processing)
+* [usgs/earthquake-cencalvm](https://github.com/usgs/cencalvm)
+* [baagaard-usgs/geomodelgrids](https://github.com/baagaard-usgs/geomodelgrids)
+* [geodynamics/pylith_installer](https://github.com/geodynamics/pylith_installer)
+
 
 ## Installation
 
